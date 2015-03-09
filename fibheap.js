@@ -1,4 +1,5 @@
 // Fibonacci Heap
+
 var List = require('./list.js');
 
 var Node = function (element)
