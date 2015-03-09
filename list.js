@@ -1,6 +1,6 @@
 // Circular doubly-linked list
 
-var Postion = function (element)
+var Position = function (element)
 {
     this.next = null;
     this.prev = null;
@@ -76,7 +76,7 @@ List.prototype.at = function (index)
     if(i >= this.size)
         throw new Error("Index out of bounds");
 
-    var it = this.Iterator();get
+    var it = this.Iterator();
     for(var i = 0; i < index; i++)
     {
         it.next();
@@ -96,7 +96,7 @@ List.prototype.find = function (element)
     return null;
 };
 
-List.Iterator = function (start)
+List.prototype.Iterator = function (start)
 {
     if(start === undefined)
         start = this.head;
@@ -112,7 +112,7 @@ List.Iterator = function (start)
     };
 };
 
-List.ReverseIterator = function (start)
+List.prototype.ReverseIterator = function (start)
 {
     if(start === undefined)
         start = this.head;
@@ -142,7 +142,7 @@ List.RoundRobinIterator = function (start)
     };
 };
 
-List.ReverseRoundRobinIterator = function (start)
+List.prototype.ReverseRoundRobinIterator = function (start)
 {
     if(start === undefined)
         start = this.head;
