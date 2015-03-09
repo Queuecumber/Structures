@@ -20,21 +20,12 @@ rbt.add(14);
 rbt.add(6);
 rbt.add(17);
 
-
-rbt.debugPrint(rbt.root, 0);
-
-console.log();
-
 rbt.remove(4);
 rbt.remove(14);
 rbt.remove(7);
 rbt.remove(25);
 rbt.remove(16);
 rbt.remove(13);
-
-rbt.debugPrint(rbt.root, 0);
-
-console.log();
 
 for(var it = rbt.InorderIterator(); it.hasNext(); it.next())
 {

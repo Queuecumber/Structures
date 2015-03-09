@@ -454,17 +454,6 @@ RedBlackTree.prototype.remove = function (element)
     return node;
 };
 
-// Print nodes and their depths for debugging
-RedBlackTree.prototype.debugPrint = function (node, depth)
-{
-    if(node !== null)
-    {
-        this.debugPrint(node.left, depth + 1);
-        console.log(node.element + ' -- ' + node.color + ': ' + depth);
-        this.debugPrint(node.right, depth + 1);
-    }
-};
-
 RedBlackTree.prototype.InorderIterator = function ()
 {
     var stack = [];
