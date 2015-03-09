@@ -7,8 +7,19 @@ var Postion = function (element)
     this.element = element;
 };
 
-var List = function ()
+var List = function (comparitor)
 {
+    if(comparitor === undefined)
+    {
+        comparitor = function (a, b)
+        {
+            if(a < b) return -1;
+            if(a > b) return 1;
+            if(a === b) return 0;
+        };
+    }
+
+    this.comparitor = comparitor;
     this.head = null;
     this.size = 0;
 };
@@ -64,7 +75,7 @@ List.prototype.at = function (index)
     if(i >= this.size)
         throw new Error("Index out of bounds");
 
-    var it = this.iterator();
+    var it = this.Iterator();get
     for(var i = 0; i < index; i++)
     {
         it.next();
@@ -73,23 +84,22 @@ List.prototype.at = function (index)
     return it.current;
 };
 
-List.prototype.find = function (element, comparitor)
+List.prototype.find = function (element)
 {
-    if(comparitor === undefined)
-        comparitor = function (a, b) { return a === b; };
-
-    for(var it = this.iterator(); it.hasNext(); it.next())
+    for(var it = this.Iterator(); it.hasNext(); it.next())
     {
-        if(comparitor(it.current.element, element))
+        if(this.comparitor(it.current.element, element) === 0)
             return it.current;
     }
 
     return null;
 };
 
-List.iterator = function ()
+List.Iterator = function (start)
 {
-    var start = this.head;
+    if(start === undefined)
+        start = this.head;
+
     var started = false;
 
     return {
@@ -101,9 +111,11 @@ List.iterator = function ()
     };
 };
 
-List.reverseIterator = function ()
+List.ReverseIterator = function (start)
 {
-    var start = this.head;
+    if(start === undefined)
+        start = this.head;
+
     var started = false;
 
     return {
@@ -115,9 +127,10 @@ List.reverseIterator = function ()
     };
 };
 
-List.roundRobinIterator = function ()
+List.RoundRobinIterator = function (start)
 {
-    var start = this.head;
+    if(start === undefined)
+        start = this.head;
 
     return {
         current: start,
@@ -128,9 +141,10 @@ List.roundRobinIterator = function ()
     };
 };
 
-List.reverseRoundRobinIterator = function ()
+List.ReverseRoundRobinIterator = function (start)
 {
-    var start = this.head;
+    if(start === undefined)
+        start = this.head;
 
     return {
         current: start,
