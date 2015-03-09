@@ -47,6 +47,40 @@ List.prototype.add = function (element, position)
     }
 
     this.size++;
+
+    return pos;
+};
+
+List.prototype.merge = function (list)
+{
+    if(list.size > 0)
+    {
+        if(this.size === 0)
+        {
+            this.head = list.head;
+            this.size += list.size;
+
+            list.head = null
+            list.size = 0;
+        }
+        else
+        {
+            var tail = this.head.prev;
+
+            var lstTail = list.head.prev;
+
+            tail.next = list.head;
+            list.head.prev = tail;
+
+            this.head.prev = lstTail;
+            lstTail.next = this.head;
+
+            this.size += list.size;
+
+            list.head = null;
+            list.size = 0;
+        }
+    }
 };
 
 List.prototype.remove = function (position)
@@ -108,23 +142,23 @@ List.prototype.Iterator = function (start)
 
         next: function () { this.current = this.current.next; started = true; },
 
-        hasNext: function () { return !(started && this.current === start);  }
+        hasNext: function () { return !(started && this.current === start) && this.current !== null;  }
     };
 };
 
 List.prototype.ReverseIterator = function (start)
 {
     if(start === undefined)
-        start = this.head;
+        start = this.head.prev;
 
     var started = false;
 
     return {
         current: start,
 
-        next: function () { current = current.prev; started = true; },
+        next: function () { this.current = this.current.prev; started = true; },
 
-        hasNext: function () { return !(started && current === start);  }
+        hasNext: function () { return !(started && this.current === start) && this.current !== null;  }
     };
 };
 
@@ -136,23 +170,23 @@ List.RoundRobinIterator = function (start)
     return {
         current: start,
 
-        next: function () { current = current.next; },
+        next: function () { this.current = this.current.next; },
 
-        hasNext: function () { return true; }
+        hasNext: function () { return this.current !== null; }
     };
 };
 
 List.prototype.ReverseRoundRobinIterator = function (start)
 {
     if(start === undefined)
-        start = this.head;
+        start = this.head.prev;
 
     return {
         current: start,
 
-        next: function () { current = current.prev; },
+        next: function () { this.current = this.current.prev; },
 
-        hasNext: function () { return true; }
+        hasNext: function () { return this.current !== null; }
     };
 };
 
