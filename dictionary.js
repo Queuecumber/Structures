@@ -1,3 +1,5 @@
+// Ordered dictionary impl. with a red-black tree
+
 var RedBlackTree = require('./redblack.js');
 
 var Element = function (key, value)
