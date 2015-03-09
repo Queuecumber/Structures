@@ -36,7 +36,7 @@ var Dictionary = function (keyComparitor)
 
 Dictionary.prototype.add = function (key, value)
 {
-    this.tree.insert(new Element(key, value));
+    this.tree.add(new Element(key, value));
 };
 
 Dictionary.prototype.get = function (key)

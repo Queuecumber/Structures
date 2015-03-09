@@ -225,7 +225,7 @@ var fixDoubleRed = function (node)
 };
 
 // Insert a new element
-RedBlackTree.prototype.insert = function (element)
+RedBlackTree.prototype.add = function (element)
 {
     var node = new Node(element); // Note this is a red node by default
 

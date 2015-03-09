@@ -2,23 +2,23 @@ var RedBlackTree = require('./redblack.js');
 
 var rbt = new RedBlackTree();
 
-rbt.insert(4);
-rbt.insert(2);
-rbt.insert(5);
-rbt.insert(10);
-rbt.insert(3);
-rbt.insert(7);
-rbt.insert(12);
-rbt.insert(13);
-rbt.insert(22);
-rbt.insert(25);
-rbt.insert(19);
-rbt.insert(15);
-rbt.insert(1);
-rbt.insert(16);
-rbt.insert(14);
-rbt.insert(6);
-rbt.insert(17);
+rbt.add(4);
+rbt.add(2);
+rbt.add(5);
+rbt.add(10);
+rbt.add(3);
+rbt.add(7);
+rbt.add(12);
+rbt.add(13);
+rbt.add(22);
+rbt.add(25);
+rbt.add(19);
+rbt.add(15);
+rbt.add(1);
+rbt.add(16);
+rbt.add(14);
+rbt.add(6);
+rbt.add(17);
 
 
 rbt.debugPrint(rbt.root, 0);
