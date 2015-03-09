@@ -24,7 +24,7 @@ var List = function (comparitor)
     this.size = 0;
 };
 
-List.prototype.add = function (element)
+List.prototype.add = function (element, position)
 {
     var pos = new Position(element);
 
@@ -36,13 +36,14 @@ List.prototype.add = function (element)
     }
     else
     {
-        var tail = this.head.prev;
+        if(position === undefined)
+            position = this.head.prev;
 
-        tail.next = pos;
-        this.head.prev = pos;
+        position.next.prev = pos;
+        pos.next = position.next;
 
-        pos.next = this.head;
-        pos.prev = tail;
+        position.next = pos;
+        pos.prev = position;
     }
 
     this.size++;
