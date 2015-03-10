@@ -35,9 +35,7 @@ heap.deleteMin();
 
 heap.merge(heap2);
 
-while(heap.size > 0)
+for(var it = heap.Muterator(); it.hasNext(); it.next())
 {
-    var min = heap.deleteMin();
-
-    console.log(min);
+    console.log(it.current);
 }
