@@ -28,15 +28,18 @@ var PriorityQueue = function (priorityComparitor)
         };
     }
 
-    this.heap = new FibonacciHeap(elementComparitor(priorityComparitor));
-    this.size = 0;
+    var heap = new FibonacciHeap(elementComparitor(priorityComparitor));
+    this.heap = heap;
+
+    Object.defineProperty(this, 'size', {
+        get: function () { return heap.size; },
+        enumerable: true
+    });
 };
 
 PriorityQueue.prototype.add = function (priority, value)
 {
     var el = new Element(priority, value);
-    this.size++;
-
     this.heap.add(el);
 };
 
@@ -49,14 +52,25 @@ PriorityQueue.prototype.peek = function ()
 PriorityQueue.prototype.remove = function ()
 {
     var el = this.heap.deleteMin();
-    this.size--;
     return el;
 };
 
 PriorityQueue.prototype.merge = function (pq)
 {
     this.heap.merge(pq.heap);
-    this.size = this.heap.size;
+};
+
+PriorityQueue.prototype.Muterator =  function ()
+{
+    var it = this.heap.Muterator();
+
+    return {
+        current: it.current,
+
+        next: function () { it.next(); this.current = it.current; },
+
+        hasNext: function() { return it.hasNext(); }
+    };
 };
 
 module.exports = PriorityQueue;
