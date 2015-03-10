@@ -11,8 +11,7 @@ queue.add('F', 'Karl Marx');
 console.log('Students in Class Order');
 console.log('============================');
 
-while(queue.size > 0)
+for(var it = queue.Muterator(); it.hasNext(); it.next())
 {
-    var s = queue.remove();
-    console.log('Name: %s, Grade: %s', s.value, s.priority);
+    console.log('Name: %s, Grade: %s', it.current.value, it.current.priority);
 }

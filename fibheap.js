@@ -102,22 +102,29 @@ var consolidate = function ()
 
 FibonacciHeap.prototype.deleteMin = function ()
 {
-    // Remove the old minimum
-    var oldMin = this.min.element;
-    this.roots.remove(this.min);
+    if(this.size > 0)
+    {
+        // Remove the old minimum
+        var oldMin = this.min.element;
+        this.roots.remove(this.min);
 
-    // Merge the old mimimums children into the roots list
-    this.roots.merge(oldMin.children);
+        // Merge the old mimimums children into the roots list
+        this.roots.merge(oldMin.children);
 
-    // Find the new minimum element
-    updateMin.call(this);
+        // Find the new minimum element
+        updateMin.call(this);
 
-    // Consolidate trees
-    consolidate.call(this);
+        // Consolidate trees
+        consolidate.call(this);
 
-    this.size--;
+        this.size--;
 
-    return oldMin.element;
+        return oldMin.element;
+    }
+    else
+    {
+        throw new Error('Cannot remove from an empty heap');
+    }
 };
 
 var cut = function (node)
@@ -178,6 +185,23 @@ FibonacciHeap.prototype.merge = function (heap)
 
     this.size += heap.size;
     heap.size = 0;
+};
+
+FibonacciHeap.prototype.Muterator = function ()
+{
+    var heap = this;
+
+    var current = null;
+    if(heap.size > 0)
+        current = heap.deleteMin();
+
+    return {
+        current: current,
+
+        next: function () { this.current = heap.size > 0 ? heap.deleteMin() : null; },
+
+        hasNext: function () { return this.current !== null; }
+    };
 };
 
 module.exports = FibonacciHeap;
